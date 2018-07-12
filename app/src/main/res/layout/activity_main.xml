@@ -13,4 +13,13 @@
         android:padding="@dimen/default_margin_padding"
         android:text="User Detail" />
 
+    <Button
+        android:id="@+id/comments_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_detail_button"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/default_margin_padding"
+        android:text="Comments" />
+
 </RelativeLayout>

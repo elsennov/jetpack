@@ -1,14 +1,16 @@
 package com.elsen.jetpack.main
 
 import com.elsen.jetpack.R
-import com.elsen.jetpack.userdetail.presentation.UserDisplayable
+import com.elsen.jetpack.comments.presentation.CommentActivity
 import com.elsen.jetpack.userdetail.presentation.UserDetailActivity
+import com.elsen.jetpack.userdetail.presentation.UserDisplayable
 import com.jakewharton.rxbinding2.view.RxView
 import com.mooveit.library.Fakeit
 import com.trello.navi2.Event
 import com.trello.navi2.component.support.NaviAppCompatActivity
 import com.trello.navi2.rx.RxNavi
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
 import org.jetbrains.anko.intentFor
@@ -21,6 +23,7 @@ class MainActivity : NaviAppCompatActivity(), AnkoLogger {
     init {
         initLayout()
         initUserDetailButton()
+        initCommentsButton()
     }
 
     private fun initLayout() {
@@ -57,6 +60,22 @@ class MainActivity : NaviAppCompatActivity(), AnkoLogger {
                 UserDetailActivity.USER to user
             )
         )
+    }
+
+    private fun initCommentsButton() {
+        RxNavi
+            .observe(this, Event.CREATE)
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap { RxView.clicks(comments_button) }
+            .takeUntil(RxNavi.observe(this, Event.DESTROY))
+            .subscribe(
+                { launchCommentsActivity() },
+                { error("onError", it) }
+            )
+    }
+
+    private fun launchCommentsActivity() {
+        startActivity(intentFor<CommentActivity>())
     }
 
 }

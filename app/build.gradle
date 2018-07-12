@@ -43,7 +43,7 @@ dependencies {
     implementation "android.arch.paging:rxjava2:$paging_version"
     implementation "android.arch.persistence.room:runtime:$lifecycle_version"
     implementation "android.arch.persistence.room:rxjava2:$lifecycle_version"
-    annotationProcessor "android.arch.persistence.room:compiler:$lifecycle_version"
+    kapt "android.arch.persistence.room:compiler:$lifecycle_version"
 
     implementation "com.trello.navi2:navi:$rx_navi_version"
     implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"

@@ -1,5 +1,6 @@
 package com.elsen.jetpack.base.data
 
+import android.arch.paging.DataSource
 import io.reactivex.Observable
 
 /**
@@ -7,10 +8,12 @@ import io.reactivex.Observable
  */
 interface ReactiveStore<T> {
 
-    fun getSingle(): Observable<T>
-    fun storeSingle(t: T)
     fun getAll(): Observable<List<T>>
+    fun getPaged(): DataSource.Factory<Int, T>
+    fun getSingle(): Observable<T>
     fun storeAll(t: List<T>)
+    fun storeSingle(t: T)
     fun replaceAll(t: List<T>)
+    fun replaceSingle(t: T)
 
 }

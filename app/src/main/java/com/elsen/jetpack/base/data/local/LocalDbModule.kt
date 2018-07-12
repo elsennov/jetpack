@@ -15,7 +15,7 @@ class LocalDbModule {
                 Room.databaseBuilder(
                     get("application_context"),
                     JetpackDatabase::class.java,
-                    "database-name"
+                    "jetpack-db"
                 ).build()
             }
         }

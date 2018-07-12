@@ -1,4 +1,4 @@
-package com.elsen.jetpack.base.data.rx
+package com.elsen.jetpack.base.rx
 
 /**
  * Created by elsennovraditya on 01/07/18

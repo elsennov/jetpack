@@ -1,16 +1,17 @@
 package com.elsen.jetpack.userdetail.presentation
 
-import android.arch.lifecycle.LiveDataReactiveStreams
 import android.databinding.DataBindingUtil
 import com.elsen.jetpack.R
+import com.elsen.jetpack.base.toObservable
 import com.elsen.jetpack.databinding.ActivityUserDetailBinding
 import com.jakewharton.rxbinding2.view.RxView
 import com.mooveit.library.Fakeit
 import com.trello.navi2.Event
 import com.trello.navi2.component.support.NaviAppCompatActivity
 import com.trello.navi2.rx.RxNavi
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_user_detail.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.error
 import org.jetbrains.anko.info
@@ -53,12 +54,8 @@ class UserDetailActivity : NaviAppCompatActivity(), AnkoLogger {
     private fun initUserDetailInfo() {
         RxNavi
             .observe(this, Event.CREATE)
-            .flatMap {
-                Observable
-                    .fromPublisher(
-                        LiveDataReactiveStreams.toPublisher(this, userVm.getUser(intent))
-                    )
-            }
+            .observeOn(Schedulers.io())
+            .flatMap { userVm.getUser(intent).toObservable(this) }
             .observeOn(AndroidSchedulers.mainThread())
             .takeUntil(RxNavi.observe(this, Event.DESTROY))
             .subscribe(

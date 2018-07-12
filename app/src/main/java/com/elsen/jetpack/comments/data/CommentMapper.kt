@@ -13,10 +13,10 @@ class CommentMapper : Function<CommentRaw, Comment> {
      */
     override fun apply(commentRaw: CommentRaw): Comment {
         return Comment(
-            commentRaw.id,
-            commentRaw.name,
-            commentRaw.email,
-            commentRaw.body
+            commentRaw.id ?: "",
+            commentRaw.name ?: "",
+            commentRaw.email ?: "",
+            commentRaw.body ?: ""
         )
     }
 

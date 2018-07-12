@@ -5,7 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import com.elsen.jetpack.base.data.local.LocalDbModule
 import com.elsen.jetpack.base.data.server.RetrofitModule
-import com.elsen.jetpack.comments.base.CommentsModule
+import com.elsen.jetpack.comments.base.CommentModule
 import com.elsen.jetpack.userdetail.base.UserModule
 import com.mooveit.library.Fakeit
 import org.jetbrains.anko.AnkoLogger
@@ -67,7 +67,7 @@ class JetpackApplication : Application(), Application.ActivityLifecycleCallbacks
             listOf(
                 baseModule,
                 UserModule.module,
-                CommentsModule.module,
+                CommentModule.module,
                 RetrofitModule.module,
                 LocalDbModule.module
             )

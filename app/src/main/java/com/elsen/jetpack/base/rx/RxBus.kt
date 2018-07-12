@@ -1,4 +1,4 @@
-package com.elsen.jetpack.base.data.rx
+package com.elsen.jetpack.base.rx
 
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject

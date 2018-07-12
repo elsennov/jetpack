@@ -1,5 +1,6 @@
 package com.elsen.jetpack.comments.data
 
+import android.arch.paging.DataSource
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -15,10 +16,9 @@ class CommentRepository(private val commentReactiveStore: CommentReactiveStore,
         return commentReactiveStore.getAll()
     }
 
-    fun fetchComments(start: Int,
-                      limit: Int): Completable {
+    fun fetchAllComments(): Completable {
         return commentService
-            .getComments(start, limit)
+            .getAllComments()
             .subscribeOn(Schedulers.io())
             .map { it.data?.comments ?: listOf() }
             .observeOn(Schedulers.computation())
@@ -26,6 +26,23 @@ class CommentRepository(private val commentReactiveStore: CommentReactiveStore,
             .map { commentMapper.apply(it) }
             .toList()
             .doOnSuccess { commentReactiveStore.replaceAll(it) }
+            .toCompletable()
+    }
+
+    fun getPagedComments(): DataSource.Factory<Int, Comment> {
+        return commentReactiveStore.getPaged()
+    }
+
+    fun fetchComments(start: Int,
+                      limit: Int): Completable {
+        return commentService
+            .getComments(start, limit)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.computation())
+            .flatMapObservable { Observable.fromIterable(it) }
+            .map { commentMapper.apply(it) }
+            .toList()
+            .doOnSuccess { commentReactiveStore.storeAll(it) }
             .toCompletable()
     }
 
