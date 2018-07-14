@@ -1,6 +1,7 @@
 package com.elsen.jetpack.comments.data
 
 import android.arch.paging.DataSource
+import com.elsen.jetpack.base.rx.toSpecificErrorIfAny
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -37,6 +38,7 @@ class CommentRepository(private val commentReactiveStore: CommentReactiveStore,
                       limit: Int): Completable {
         return commentService
             .getComments(start, limit)
+            .toSpecificErrorIfAny()
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.computation())
             .flatMapObservable { Observable.fromIterable(it) }

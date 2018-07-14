@@ -46,4 +46,8 @@ class CommentAdapter : PagedListAdapter<CommentDisplayable, RecyclerView.ViewHol
         return if (item == null) R.layout.item_loading else R.layout.item_comment
     }
 
+    fun getLastItem(): CommentDisplayable? {
+        return currentList?.lastOrNull()
+    }
+
 }

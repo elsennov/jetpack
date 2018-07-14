@@ -1,4 +1,4 @@
-package com.elsen.jetpack.main
+package com.elsen.jetpack.main.presentation
 
 import com.elsen.jetpack.R
 import com.elsen.jetpack.comments.presentation.CommentActivity

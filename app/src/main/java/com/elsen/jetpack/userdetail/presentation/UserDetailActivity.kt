@@ -2,7 +2,7 @@ package com.elsen.jetpack.userdetail.presentation
 
 import android.databinding.DataBindingUtil
 import com.elsen.jetpack.R
-import com.elsen.jetpack.base.toObservable
+import com.elsen.jetpack.base.presentation.toObservable
 import com.elsen.jetpack.databinding.ActivityUserDetailBinding
 import com.jakewharton.rxbinding2.view.RxView
 import com.mooveit.library.Fakeit

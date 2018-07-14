@@ -1,4 +1,4 @@
-package com.elsen.jetpack.base
+package com.elsen.jetpack.base.presentation
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData

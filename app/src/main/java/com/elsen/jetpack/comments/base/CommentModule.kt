@@ -1,6 +1,7 @@
 package com.elsen.jetpack.comments.base
 
 import android.arch.paging.PagedList
+import com.elsen.jetpack.base.Constant
 import com.elsen.jetpack.base.data.local.JetpackDatabase
 import com.elsen.jetpack.comments.data.CommentMapper
 import com.elsen.jetpack.comments.data.CommentReactiveStore
@@ -30,9 +31,9 @@ object CommentModule {
         bean("comments_paged_list_config") {
             PagedList.Config.Builder()
                 .setEnablePlaceholders(false)
-                .setInitialLoadSizeHint(20)
-                .setPrefetchDistance(5)
-                .setPageSize(20)
+                .setInitialLoadSizeHint(Constant.PAGE_SIZE)
+                .setPrefetchDistance(Constant.PREFETCH_DISTANCE)
+                .setPageSize(Constant.PAGE_SIZE)
                 .build()
         }
         bean { CommentInteractor(get(), get(), get()) }
